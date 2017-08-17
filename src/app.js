@@ -4,60 +4,7 @@ $(function () {
   renderGraph();
   //search();
 
-  function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("results");
-  switching = true;
-  //Set the sorting direction to ascending:
-  dir = "asc"; 
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.getElementsByTagName("TR");
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      /*check if the two rows should switch place,
-      based on the direction, asc or desc:*/
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          //if so, mark as a switch and break the loop:
-          shouldSwitch= true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      //Each time a switch is done, increase this count by 1:
-      switchcount ++; 
-    } else {
-      /*If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again.*/
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}
+
   // var el = document.getElementById('#loader');
   $(".buttonload").css("display","none");
 
@@ -118,11 +65,21 @@ function showMovie(title) {
 function simpleTemplating(data) {
     var html = '<tr>';
     $.each(data, function(index, item){
-        html += "<td>"+ item.authorName+ "</td><td>"+ item.released +"</td><td>"+ item.tagline +"</td><tr>";
+        html += "<td>"+ item.authorName+ "</td><tr>";
     });
     // html += '</>';
     return html;
 }
+
+function renderArticleResults(data) {
+    var html = '<tr>';
+    $.each(data, function(index, item){
+         html += "<td>" + item.key + "</td><td>"+item.title + "</td><td>"+item.year + "</td><tr>";
+    });
+    // html += '</>';
+    return html;
+}
+
 
 function search() {
    $(".buttonload").css("display","block");
@@ -162,20 +119,23 @@ function searchByConf() {
     .searchByConf(query)
     .then(authors => {
       var t = $("table#results tbody").empty();
-
-      if (authors) {
+      $(".buttonload").css("display","none");
+      $("#pagination-container").pagination({
+        dataSource: authors,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = simpleTemplating(data);
+             $('table#results tbody').html(html);
+          }
+        })
+     /* if (authors) {
         authors.forEach(author => {
           $("<tr><td class='author'>" + author.authorName + "</td></tr>").appendTo(t)
             .click(function() {
              // showMovie($(this).find("td.movie").text());
             })
         });
-
-       /* var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+      }*/
     });
 }
 
@@ -186,8 +146,15 @@ function searchForCoAuth() {
     .searchForCoAuth(query)
     .then(authors => {
       var t = $("table#results tbody").empty();
-
-      if (authors) {
+       $("#pagination-container").pagination({
+        dataSource: authors,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = simpleTemplating(data);
+             $('table#results tbody').html(html);
+          }
+        })
+    /*  if (authors) {
         authors.forEach(author => {
           $("<tr><td class='author'>" + author.authorName + "</td></tr>").appendTo(t)
             .click(function() {
@@ -195,11 +162,8 @@ function searchForCoAuth() {
             })
         });
 
-       /* var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+      
+      }*/
     });
 }
 
@@ -212,6 +176,15 @@ function searchCommonAuth() {
     .then(authors => {
       var t = $("table#results tbody").empty();
 
+       $("#pagination-container").pagination({
+        dataSource: authors,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = simpleTemplating(data);
+             $('table#results tbody').html(html);
+          }
+        })
+/*
       if (authors) {
         authors.forEach(author => {
           $("<tr><td class='author'>" + author.authorName + "</td></tr>").appendTo(t)
@@ -219,12 +192,7 @@ function searchCommonAuth() {
              // showMovie($(this).find("td.movie").text());
             })
         });
-
-       /* var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+      }*/
     });
 }
 function searchConfAuth() {
@@ -236,7 +204,15 @@ function searchConfAuth() {
     .then(authors => {
       var t = $("table#results tbody").empty();
 
-      if (authors) {
+       $("#pagination-container").pagination({
+        dataSource: authors,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = simpleTemplating(data);
+             $('table#results tbody').html(html);
+          }
+        })
+     /* if (authors) {
         authors.forEach(author => {
           $("<tr><td class='author'>" + author.authorName + "</td></tr>").appendTo(t)
             .click(function() {
@@ -244,11 +220,8 @@ function searchConfAuth() {
             })
         });
 
-       /* var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+      
+      }*/
     });
 }
 
@@ -262,7 +235,15 @@ function searchAuthsArticles() {
     .then(articles => {
       var t = $("table#results-article tbody").empty();
 
-      if (articles) {
+       $("#pagination-container").pagination({
+        dataSource: articles,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = renderArticleResults(data);
+             $('table#results-article tbody').html(html);
+          }
+        })
+     /* if (articles) {
         articles.forEach(article => {
           $("<tr><td class='article'>" + article.key + "</td><td>"+article.title + "</td><td>"+article.year + "</td></tr>").appendTo(t)
             .click(function() {
@@ -270,11 +251,8 @@ function searchAuthsArticles() {
             })
         });
 
-        /*var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+       
+      }*/
     });
 }
 
@@ -285,20 +263,22 @@ function searchCitedArticles() {
     .searchCitedArticles(query)
     .then(articles => {
       var t = $("table#results-article tbody").empty();
-
-      if (articles) {
+      $("#pagination-container").pagination({
+        dataSource: articles,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = renderArticleResults(data);
+             $('table#results-article tbody').html(html);
+          }
+        })
+      /*if (articles) {
         articles.forEach(article => {
           $("<tr><td class='article'>" + article.key + "</td><td>"+article.title + "</td><td>"+article.year + "</td></tr>").appendTo(t)
             .click(function() {
               //showMovie($(this).find("td.movie").text());
             })
         });
-
-        /*var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+      }*/
     });
 }
 
@@ -309,8 +289,15 @@ function searchAuthsCite() {
     .searchAuthsCite(query)
     .then(articles => {
       var t = $("table#results-article tbody").empty();
-
-      if (articles) {
+        $("#pagination-container").pagination({
+        dataSource: articles,
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = renderArticleResults(data);
+             $('table#results-article tbody').html(html);
+          }
+        })
+      /*if (articles) {
         articles.forEach(article => {
           $("<tr><td class='article'>" + article.key + "</td><td>"+article.title + "</td><td>"+article.year + "</td></tr>").appendTo(t)
             .click(function() {
@@ -318,11 +305,8 @@ function searchAuthsCite() {
             })
         });
 
-        /*var first = movies[0];
-        if (first) {
-          showMovie(first.title);
-        }*/
-      }
+      
+      }*/
     });
 }
 function renderGraph() {
