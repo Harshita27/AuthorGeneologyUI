@@ -7,6 +7,7 @@ $(function () {
 
   // var el = document.getElementById('#loader');
   $(".buttonload").css("display","none");
+  $(".buttonloadA").css("display","none");
 
   $("#search-article").submit(e => {
     e.preventDefault();
@@ -113,6 +114,7 @@ function search() {
     });
 }
 function searchByConf() {
+  $(".buttonload").css("display","block");
   var query = $("#search-conf").find("input[name=search-conf]").val();
   console.log(query);
   api
@@ -140,6 +142,8 @@ function searchByConf() {
 }
 
 function searchForCoAuth() {
+  $(".buttonload").css("display","block");
+
   var query = $("#search-coauth").find("input[name=search-coauth]").val();
   console.log(query);
   api
@@ -168,6 +172,7 @@ function searchForCoAuth() {
 }
 
 function searchCommonAuth() {
+  $(".buttonload").css("display","block");
   var query1 = $("#search-common").find("input[name=author1]").val();
   var query2 = $("#search-common").find("input[name=author2]").val();
   console.log(query1, query2);
@@ -196,6 +201,7 @@ function searchCommonAuth() {
     });
 }
 function searchConfAuth() {
+  $(".buttonload").css("display","block");
   var query1 = $("#search-2conf").find("input[name=search-conf-1]").val();
   var query2 = $("#search-2conf").find("input[name=search-conf-2]").val();
   console.log(query1, query2);
@@ -228,6 +234,7 @@ function searchConfAuth() {
 /*****************ARTICLE API************/
 
 function searchAuthsArticles() {
+  $(".buttonloadA").css("display","block");
   var query = $("#search-article-auth").find("input[name=search-article-auth]").val();
   console.log(query);
   api
@@ -235,7 +242,8 @@ function searchAuthsArticles() {
     .then(articles => {
       var t = $("table#results-article tbody").empty();
 
-       $("#pagination-container").pagination({
+        $(".buttonloadA").css("display","none");
+        $("#pagination-container").pagination({
         dataSource: articles,
         callback: function(data, pagination) {
             // template method of yourself
@@ -257,13 +265,15 @@ function searchAuthsArticles() {
 }
 
 function searchCitedArticles() {
+  $(".buttonloadA").css("display","block");
    var query = $("#search-cited-auth").find("input[name=search-cited-auth]").val();
   console.log(query);
   api
     .searchCitedArticles(query)
     .then(articles => {
       var t = $("table#results-article tbody").empty();
-      $("#pagination-container").pagination({
+       $(".buttonloadA").css("display","none");
+       $("#pagination-container").pagination({
         dataSource: articles,
         callback: function(data, pagination) {
             // template method of yourself
@@ -283,13 +293,15 @@ function searchCitedArticles() {
 }
 
 function searchAuthsCite() {
+  $(".buttonloadA").css("display","block");
    var query = $("#search-cite-for").find("input[name=search-cite-for]").val();
   console.log(query);
   api
     .searchAuthsCite(query)
     .then(articles => {
       var t = $("table#results-article tbody").empty();
-        $("#pagination-container").pagination({
+         $(".buttonloadA").css("display","none");
+         $("#pagination-container").pagination({
         dataSource: articles,
         callback: function(data, pagination) {
             // template method of yourself
