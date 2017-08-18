@@ -11,24 +11,29 @@ $(function () {
 
   $("#search-article").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     search();
   });
   $("#search-conf").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     searchByConf();
   });
   $("#search-coauth").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     searchForCoAuth();
   });
   
   $("#search-common").submit(e => {
     e.preventDefault();
+    $(".tbodyclass").empty();
     searchCommonAuth();
   });
 
   $("#search-2conf").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     searchConfAuth();
   });
 
@@ -36,14 +41,17 @@ $(function () {
   
   $("#search-article-auth").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     searchAuthsArticles();
   });
   $("#search-cited-auth").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     searchCitedArticles();
   });
   $("#search-cite-for").submit(e => {
     e.preventDefault();
+     $(".tbodyclass").empty();
     searchAuthsCite();
   });
 });
@@ -150,6 +158,7 @@ function searchForCoAuth() {
     .searchForCoAuth(query)
     .then(authors => {
       var t = $("table#results tbody").empty();
+      $(".buttonload").css("display","none");
        $("#pagination-container").pagination({
         dataSource: authors,
         callback: function(data, pagination) {
@@ -180,7 +189,7 @@ function searchCommonAuth() {
     .searchCommonAuth(query1, query2)
     .then(authors => {
       var t = $("table#results tbody").empty();
-
+$(".buttonload").css("display","none");
        $("#pagination-container").pagination({
         dataSource: authors,
         callback: function(data, pagination) {
@@ -209,7 +218,7 @@ function searchConfAuth() {
     .searchConfAuth(query1, query2)
     .then(authors => {
       var t = $("table#results tbody").empty();
-
+$(".buttonload").css("display","none");
        $("#pagination-container").pagination({
         dataSource: authors,
         callback: function(data, pagination) {
