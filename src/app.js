@@ -25,6 +25,13 @@ $(function () {
     searchForCoAuth();
   });
   
+  
+   $("#search-10-coauth").submit(e => {
+    e.preventDefault();
+     $(".tbodyclass").empty();
+    searchFor10();
+  });
+
   $("#search-common").submit(e => {
     e.preventDefault();
     $(".tbodyclass").empty();
@@ -236,6 +243,35 @@ $(".buttonload").css("display","none");
         });
 
       
+      }*/
+    });
+}
+
+function searchFor10() {
+  $(".buttonload").css("display","block");
+  var query1 = $("#search-10-coauth").find("input[name=author]").val();
+  var query2 = $("#search-10-coauth").find("input[name=count]").val();
+  console.log(query1, query2);
+  api
+    .searchFor10(query1, query2)
+    .then(authors => {
+      var t = $("table#results tbody").empty();
+$(".buttonload").css("display","none");
+       $("#pagination-container").pagination({
+        dataSource: authors,
+        callback: function(data, pagination) {
+            var html = simpleTemplating(data);
+             $('table#results tbody').html(html);
+          }
+        })
+/*
+      if (authors) {
+        authors.forEach(author => {
+          $("<tr><td class='author'>" + author.authorName + "</td></tr>").appendTo(t)
+            .click(function() {
+             // showMovie($(this).find("td.movie").text());
+            })
+        });
       }*/
     });
 }

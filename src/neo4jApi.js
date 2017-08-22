@@ -94,6 +94,27 @@ function searchCommonAuth(author1, author2) {
     });
 }
 
+/*Function to find all common co authors with given article count*/
+function searchFor10(author, count) {
+  console.log("running query");
+  var session = driver.session();
+  return session
+    .run(
+      'MATCH (:author { authorName: {author} })-[r:CO_AUTHOR]-(m) WHERE r.articleCount >= {count} RETURN DISTINCT m',
+      {author:   author, count: Number(count)}
+    )
+    .then(result => {
+      session.close();
+      return result.records.map(record => {
+      console.log(record);
+        return new Author(record.get('m'));
+      });
+    })
+    .catch(error => {
+      session.close();
+      throw error;
+    });
+}
 /*Function to find common authors between two conferences/journals*/
 function searchConfAuth(jour1, jour2) {
   console.log("running query");
@@ -184,30 +205,7 @@ function searchAuthsCite(queryString) {
 }
 
 
-function getMovie(title) {
-  var session = driver.session();
-  return session
-    .run(
-      "MATCH (movie:Movie {title:{title}}) \
-      OPTIONAL MATCH (movie)<-[r]-(person:Person) \
-      RETURN movie.title AS title, \
-      collect([person.name, \
-           head(split(lower(type(r)), '_')), r.roles]) AS cast \
-      LIMIT 1", {title})
-    .then(result => {
-      session.close();
 
-      if (_.isEmpty(result.records))
-        return null;
-
-      var record = result.records[0];
-      return new MovieCast(record.get('title'), record.get('cast'));
-    })
-    .catch(error => {
-      session.close();
-      throw error;
-    });
-}
 
 function getGraph() {
   var session = driver.session();
@@ -248,6 +246,6 @@ exports.searchConfAuth = searchConfAuth;
 exports.searchAuthsArticles = searchAuthsArticles;
 exports.searchCitedArticles = searchCitedArticles;
 exports.searchAuthsCite = searchAuthsCite;
-exports.getMovie = getMovie;
+exports.searchFor10 = searchFor10;
 exports.getGraph = getGraph;
 
