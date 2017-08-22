@@ -164,12 +164,14 @@ function sortTableAuthor(n) {
 </div>
 
 <div class="row">
-<h4>Search authors based on the following parameters:</h4>
+<h3 style="color: firebrick;
+    text-align: center;
+    font-weight: bold;">Search authors based on the following parameters:</h3>
 <div class="col-md-5">
 	<!--OK-->
 	<div class="row">
                  <form role="search-article" class="navbar-form" id="search-article">
-                        <p>For an article title search for authors</p>
+                        <p><h4>Enter a keyword that appears in an article title to search for all authors who have similar article titles</h4></p>
                             <div class="form-group">
                                 <input type="text"  placeholder="Search for Article Title" class="form-control" name="search-article">
                             </div>
@@ -180,7 +182,7 @@ function sortTableAuthor(n) {
        <!--OK-->
        <div class="row">       
                         <form role="search-conf" class="navbar-form" id="search-conf">
-                        <p> Enter a conference name to find all authors who have published in the conference</p>
+                        <p><h4>Enter a conference name to find all authors who have published in that conference </h4></p>
                             <div class="form-group">
                                 <input type="text" value="pods" placeholder="Search for Conference Name" class="form-control" name="search-conf">
                             </div>
@@ -192,7 +194,7 @@ function sortTableAuthor(n) {
         <div class="row">
                  
                         <form role="search-coauth" class="navbar-form" id="search-coauth">
-                        <p> Enter an author name to find all his/her co-authors</p>
+                        <p><h4> Enter an author name to find all his/her co-authors </h4></p>
                             <div class="form-group">
                                 <input type="text" value="Sridhar Ramaswamy" placeholder="Search for Author Name" class="form-control" name="search-coauth">
                             </div>
@@ -205,7 +207,7 @@ function sortTableAuthor(n) {
         <div class="row">
                  
                         <form role="search-10-coauth" class="navbar-form" id="search-10-coauth">
-                        <p> Enter an author name to find his/her TOP 10 co-authors</p>
+                        <p><h4> Enter an author name to find his/her TOP 10 co-authors </h4></p>
                             <div class="form-group">
                                 <input type="text" value="Sridhar Ramaswamy" placeholder="Search for Author Name" class="form-control" name="search-10-coauth">
                             </div>
@@ -217,7 +219,7 @@ function sortTableAuthor(n) {
         <div class="row">
                  
                         <form role="search-common" class="navbar-form" id="search-common">
-                        <p> Enter two authors for whom you want to find common co-authors</p>
+                        <p><h4> Enter two authors to find their common co-authors i.e. authors with whom both the authors have published </h4></p>
                             <div class="form-group">
                                 <input type="text" value="Sridhar Ramaswamy" placeholder="Search for Author Name" class="form-control" name="author1">
                             </div>
@@ -232,7 +234,7 @@ function sortTableAuthor(n) {
          <div class="row">
              
                         <form role="search-2conf" class="navbar-form" id="search-2conf">
-                        <p> Enter two conference names to find all common authors</p>
+                        <p><h4> Enter two conference names to find all common authors </h4></p>
                             <div class="form-group">
                                 <input type="text" value="pods" placeholder="Conference 1" class="form-control" name="search-conf-1">
                                
@@ -246,7 +248,7 @@ function sortTableAuthor(n) {
          
         </div>
         <!--TODO-->
-       <div class="row">
+    <!--    <div class="row">
             
                         <form role="search-percent-conf" class="navbar-form" id="search-percent-conf">
                         <p> Enter two conference names to find all percentage of common authors</p>
@@ -260,7 +262,7 @@ function sortTableAuthor(n) {
                             <button class="btn btn-default" type="submit">Search Common Authors</button>
                         </form>
            
-        </div>
+        </div> -->
         </div> 
     <div class="col-md-5">
         <div class="panel panel-default">
@@ -298,12 +300,14 @@ function sortTableAuthor(n) {
 </div>
 <hr style="height:3	px; background-color: #bbb;">
 <div class="row">
-<h4>Search articles based on the following parameters:</h4>
+<h3 style="color: firebrick;
+    text-align: center;
+    font-weight: bold;">Search articles based on the following parameters:</h3>
 <div class="col-md-5">
 		<!--OK-->
        <div class="row">       
                         <form role="search-article-auth" class="navbar-form" id="search-article-auth">
-                        <p> Enter an author name to find all his articles</p>
+                        <p><h4> Enter an author name to find all his articles </h4></p>
                             <div class="form-group">
                                 <input type="text"  placeholder="Author Name" class="form-control" name="search-article-auth">
                             </div>
@@ -314,7 +318,7 @@ function sortTableAuthor(n) {
             <!--OK-->
        <div class="row">       
                         <form role="search-cited-auth" class="navbar-form" id="search-cited-auth">
-                        <p> Enter an author name to find all articles he has cited</p>
+                        <p> <h4>Enter an author name to find all articles he has cited </h4></p>
                             <div class="form-group">
                                 <input type="text"  placeholder="Author Name" class="form-control" name="search-cited-auth">
                             </div>
@@ -325,7 +329,7 @@ function sortTableAuthor(n) {
             <!--OK-->
             <div class="row">       
                         <form role="search-cite-for" class="navbar-form" id="search-cite-for">
-                        <p> Enter an author name to find which articles have cited him/her</p>
+                        <p><h4> Enter an author name to find which articles have cited him/her </h4></p>
                             <div class="form-group">
                                 <input type="text"  placeholder="Author Name" class="form-control" name="search-cite-for">
                             </div>
