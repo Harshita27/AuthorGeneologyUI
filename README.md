@@ -30,5 +30,7 @@ Queries to search articles:
 
 <h2>Features of the web app:</h2>
 
-1. Establishes connection to the hosted dblp graph database
-2. The search results are sortable alphabetically
+1. Establishes connection to the hosted dblp graph database.
+2. Allows to query the database on different parameters.
+3. Presents the ressults in an easy to read tabular format.
+4. The search results are sortable alphabetically.
